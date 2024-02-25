@@ -2,60 +2,19 @@
 <html lang="en">
     <head>
         <title>Search</title>
-        <style>
-            h1, h2, form {
-                text-align: center;
-            }
-    
-            h1, h2 {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-    
-            h1 {
-                font-size: 90px;
-            }
-
-            a {
-                text-align: right;
-                margin: 5px;
-            }
-
-            #searchBar {
-                width: 580px;
-                height: 45px;
-                border-radius: 23px;
-                margin: 2px;
-                padding-left: 23px;
-                padding-right: 23px;
-            }
-
-            img {
-                display: block;
-                margin-top: 230px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 25px;
-            }
-            
-            .buttons > input {
-                margin-top: 25px;
-                padding: 10px 15px;
-            }
-        </style>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
         <a href="image.html">Image Search</a>
         <a href="advanced.html">Advanced Search</a>
-        <div class="logo">
-            <img src="google_logo.png" alt="Google Logo">
-        </div>
+        <img src="google_logo.png" alt="Google Logo">
         <form action="https://www.google.com/search">
             <div>
-                <input id="searchBar" type="text" name="q">
+                <input class="searchBar" type="text" name="q">
             </div>
-            <div class="buttons">
-                <input type="submit" value="Google Search">
-                <input type="submit" value="I'm feeling Lucky" name="btnI">
+            <div>
+                <input class="button" type="submit" value="Google Search">
+                <input class="button" type="submit" value="I'm feeling Lucky" name="btnI">
             </div>
             
         </form>
@@ -63,7 +22,3 @@
         
     </body>
 </html>
-
-
-
-<!-- Like Google’s own, your search bar should be centered with rounded corners.  -->

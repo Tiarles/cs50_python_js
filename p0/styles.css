@@ -1,0 +1,87 @@
+form, a, .grid, .grid > label, #advanced_title, #advanced_subtitle, #submit, .searchBar{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+    text-align: center;
+}
+
+a {
+    text-align: right;
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: 110px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#advanced_title, #advanced_subtitle, .grid {
+    margin-left: 50px;
+}
+
+#advanced_title, #advanced_subtitle {
+    font-size: 18px;
+    
+}
+
+#advanced_title {
+    color: #D33A2D;
+    margin-top: 60px;
+    margin-bottom: 35px;
+}
+
+#advanced_subtitle {
+    color: grey;
+    margin-top: 55px;
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-row-gap: 15px;
+    grid-template-columns: 200px 630px;
+}
+
+.grid > input {
+    height: 30px;
+    padding-left: 10px;
+}
+
+.grid > label {
+    font-size: 15px;
+    text-align: left;
+}
+
+#advanced_submit {
+    background-color: #5E83F7;
+    color: white;
+    border: none;
+    width: 130px;
+    height: 30px;
+    margin-top: 28px;
+}
+
+img {
+    display: block;
+    margin-top: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 330px;
+    height: auto;
+}
+
+.button {
+    margin-top: 25px;
+    padding: 10px 15px;
+}
+
+.searchBar {
+    width: 580px;
+    height: 45px;
+    border-radius: 23px;
+    margin: 2px;
+    padding-left: 23px;
+    padding-right: 23px;
+}
