@@ -1,28 +1,5 @@
 import re
 
-p = re.compile('[a-z]+')
-m = p.match("tempo")
-print(m.group())
-print(m.span())
-
-p = re.compile('[a-z]+')
-# m = p.match("::: message")
-m = p.search("::: message")
-print(m.group())
-print(m.span())
-
-###############################
-import re
-
-p = re.compile('section{ ( [^}]* ) }', re.VERBOSE)
-p.sub(r'subsection{\1}','section{First} section{second}')
-print()
-
-
-###############################
-
-import re
-
 filepath = r"C:\Tiarles\cs50_python_js\0_project_1\wiki\entries\CSS.md"
 
 patterns = {
@@ -61,6 +38,28 @@ for i, row in enumerate(open(filepath)):
         print(f"Match: {match}")
     else:
         print(f"No match!")
+
+#########################################
+
+import re
+
+p = re.compile('[a-z]+')
+m = p.match("tempo")
+print(m.group())
+print(m.span())
+
+p = re.compile('[a-z]+')
+# m = p.match("::: message")
+m = p.search("::: message")
+print(m.group())
+print(m.span())
+
+###############################
+import re
+
+p = re.compile('section{ ( [^}]* ) }', re.VERBOSE)
+p.sub(r'subsection{\1}','section{First} section{second}')
+print()
 
 #####################################
 
