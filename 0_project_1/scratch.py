@@ -32,6 +32,7 @@ patterns = {
     "h4": (re.compile('^#### (.*)', re.M), r'<h4>\1</h4>'),
     "h5": (re.compile('^##### (.*)', re.M), r'<h5>\1</h5>'),
     "h6": (re.compile('^###### (.*)', re.M), r'<h6>\1</h6>'),
+    "a": (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>')
 }
 
 with open(filepath, 'r') as fmd:
@@ -65,12 +66,14 @@ for i, row in enumerate(open(filepath)):
 
 import re
 
-links = r"to an [HTML](/wiki/HTML) page."
+links = r"to an [HTML](/wiki/HTML) page. Also, on [Github](www.github.com) you can find more details."
 
-# p = re.compile(R'\[(.*)\]\((.*)\)', re.M)
-p = re.compile(r'\((.*)\)')
-m = p.match(links)
-print(m)
+p = re.compile(R'\[(.*?)\]\((.*?)\)', re.M)
+# m = p.findall(links); print(m)
+# m = p.search(links); print(m)
+
+
+html_str = p.sub(R'<a href="\2">\1</a>', links); print(html_str)
 
 ########################################################
 def removing_console_color_chars(packet_str):
