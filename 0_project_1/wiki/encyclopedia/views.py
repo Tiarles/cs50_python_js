@@ -15,9 +15,18 @@ def index(request):
 
 def css(request):
     filestr_md = util.get_entry("CSS")
-    file_html_body = util.markdown_to_html_body(filestr_md, "CSS", verbose=False)
+    file_html_body = util.markdown_to_html_body(filestr_md, verbose=False)
 
     return render(request, "encyclopedia\entries_struct.html", {
         "title": "CSS",
+        "body": file_html_body,
+    })
+
+def django(request):
+    filestr_md = util.get_entry("Django")
+    file_html_body = util.markdown_to_html_body(filestr_md, verbose=False)
+
+    return render(request, "encyclopedia\entries_struct.html", {
+        "title": "Django",
         "body": file_html_body,
     })
