@@ -1,31 +1,4 @@
-import re
-
 filepath = r"C:\Tiarles\cs50_python_js\0_project_1\wiki\entries\CSS.md"
-
-patterns = {
-    "h1": (re.compile('^# (.*)', re.M), r'<h1>\1</h1>'),
-    "h2": (re.compile('^## (.*)', re.M), r'<h2>\1</h2>'),
-    "h3": (re.compile('^### (.*)', re.M), r'<h3>\1</h3>'),
-    "h4": (re.compile('^#### (.*)', re.M), r'<h4>\1</h4>'),
-    "h5": (re.compile('^##### (.*)', re.M), r'<h5>\1</h5>'),
-    "h6": (re.compile('^###### (.*)', re.M), r'<h6>\1</h6>'),
-    "a": (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>')
-}
-
-with open(filepath, 'r') as fmd:
-    filestr = fmd.read()
-
-print("Markdown:")
-print(repr(filestr))
-
-file_html = filestr
-
-for pattern, sub_str in patterns.values():
-    file_html = pattern.sub(sub_str, file_html)
-
-print("\nHTML:")
-print(file_html)
-
 
 for i, row in enumerate(open(filepath)):
     # if title is None:  # To add HTML Title

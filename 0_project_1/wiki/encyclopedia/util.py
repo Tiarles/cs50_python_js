@@ -39,19 +39,13 @@ def get_entry(title):
     """
     try:
         f = default_storage.open(f"entries/{title}.md")
-        ret = f.read().decode("utf-8"); print("ret: ", ret)
+        ret = f.read().decode("utf-8")
         return ret
     except FileNotFoundError:
         return None
 
 
-def markdown_to_html_body(file_md_path, verbose=False):
-    import re
-    import os
-
-    # folder_path = os.path.dirname(file_md_path)
-    title = os.path.basename(file_md_path)
-
+def markdown_to_html_body(filestr, verbose=False):
     patterns = {
         "h1": (re.compile('^# (.*)', re.M), r'<h1>\1</h1>'),
         "h2": (re.compile('^## (.*)', re.M), r'<h2>\1</h2>'),
@@ -62,24 +56,16 @@ def markdown_to_html_body(file_md_path, verbose=False):
         "a": (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>')
     }
 
-    with open(file_md_path, 'r') as fmd:
-        filestr = fmd.read()
-
-    if verbose:
-        print("Markdown:")
-        print(filestr)
-
     file_html_body = filestr
 
     for pattern, sub_str in patterns.values():
         file_html_body = pattern.sub(sub_str, file_html_body)
 
     if verbose:
-        print("\nHTML:")
+        print("Markdown:")
+        print(filestr)
+        print()
+        print("HTML:")
         print(file_html_body)
 
-    with open(file_md_path, 'w') as fmd:
-        filestr = fmd.read()
-
-
-    return file_html_body, title
+    return file_html_body
