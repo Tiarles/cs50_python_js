@@ -30,3 +30,13 @@ def django(request):
         "title": "Django",
         "body": file_html_body,
     })
+
+def entries(request, title):
+    title_cap = title.capitalize()
+    filestr_md = util.get_entry(title_cap)
+    file_html_body = util.markdown_to_html_body(filestr_md)
+
+    return render(request, "encyclopedia\entries_struct.html", {
+        "title": title_cap,
+        "body": file_html_body,
+    })

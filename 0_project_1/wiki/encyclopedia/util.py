@@ -46,19 +46,20 @@ def get_entry(title):
 
 
 def markdown_to_html_body(filestr, verbose=False):
-    patterns = {
-        "h1": (re.compile('^# (.*)', re.M), r'<h1>\1</h1>'),
-        "h2": (re.compile('^## (.*)', re.M), r'<h2>\1</h2>'),
-        "h3": (re.compile('^### (.*)', re.M), r'<h3>\1</h3>'),
-        "h4": (re.compile('^#### (.*)', re.M), r'<h4>\1</h4>'),
-        "h5": (re.compile('^##### (.*)', re.M), r'<h5>\1</h5>'),
-        "h6": (re.compile('^###### (.*)', re.M), r'<h6>\1</h6>'),
-        "a": (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>')
-    }
+    patterns = [
+        (re.compile('^# (.*)', re.M),             r'<h1>\1</h1>'),
+        (re.compile('^## (.*)', re.M),            r'<h2>\1</h2>'),
+        (re.compile('^### (.*)', re.M),           r'<h3>\1</h3>'),
+        (re.compile('^#### (.*)', re.M),          r'<h4>\1</h4>'),
+        (re.compile('^##### (.*)', re.M),         r'<h5>\1</h5>'),
+        (re.compile('^###### (.*)', re.M),        r'<h6>\1</h6>'),
+        (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>'),
+        (re.compile(R'\*\*(.*?)\*\*', re.M),      r'<strong>\1</strong>'),
+    ]
 
     file_html_body = filestr
 
-    for pattern, sub_str in patterns.values():
+    for pattern, sub_str in patterns:
         file_html_body = pattern.sub(sub_str, file_html_body)
 
     if verbose:

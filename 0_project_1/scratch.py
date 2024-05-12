@@ -65,3 +65,80 @@ def removing_console_color_chars(packet_str):
     ''', re.VERBOSE)
     return ansi_escape.sub('', packet_str)
 
+###########################################################
+
+import re
+
+links = r"to an [HTML](/wiki/HTML) page. Also, on [Github](www.github.com) you can find more details."
+
+p = re.compile(R'\[(.*?)\]\((.*?)\)', re.M)
+# m = p.findall(links); print(m)
+# m = p.search(links); print(m)
+
+
+html_str = p.sub(R'<a href="\2">\1</a>', links); print(html_str)
+
+###########################################################
+
+"^\* (.*)\n*$"
+
+"""
+* headings
+* paragraphs
+* lists
+* links
+* and more!
+
+asdasdasdf * and more!
+"""
+
+###########################################################
+
+"\*\*(.*?)\*\*"
+
+"""
+Python is a programming language that can be used both for writing **command-line scripts** or building **web applications**.
+"""
+
+###########################################################
+
+"^([a-zA-Z0-9 \[\]\(\)\/\*])*$\n"
+
+"""
+# CSS
+
+CSS is a language that can be used to add style to an [HTML](/wiki/HTML) page.
+
+
+# Django
+
+Django is a web framework written using [Python](/wiki/Python) that allows for the design of web applications that generate [HTML](/wiki/HTML) dynamically.
+
+
+# Git
+
+Git is a version control tool that can be used to keep track of versions of a software project.
+
+## GitHub
+
+GitHub is an online service for hosting git repositories.
+
+
+# HTML
+
+HTML is a markup language that can be used to define the structure of a web page. HTML elements include
+
+* headings
+* paragraphs
+* lists
+* links
+* and more!
+
+The most recent major version of HTML is HTML5.
+
+
+# Python
+
+Python is a programming language that can be used both for writing **command-line scripts** or building **web applications**.
+
+"""
