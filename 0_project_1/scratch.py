@@ -80,25 +80,41 @@ html_str = p.sub(R'<a href="\2">\1</a>', links); print(html_str)
 
 ###########################################################
 
-"^\* (.*)\n*$"
+import re
 
-"""
+p = re.compile(R"^\* (.*)$\n", re.M)
+
+links = """peido da onca
 * headings
 * paragraphs
 * lists
 * links
 * and more!
 
-asdasdasdf * and more!
-"""
+asdasdasdf * and more!"""
 
-###########################################################
+print(links)
+# print(repr(links))
 
-"\*\*(.*?)\*\*"
+elements_list = p.findall(links); print(elements_list)
 
-"""
-Python is a programming language that can be used both for writing **command-line scripts** or building **web applications**.
-"""
+print()
+print("HTML:")
+
+# html_str = p.sub(r'    <li>\1</li>\n', links)
+
+# html_str = f"<ul>\n{html_str}\n</ul>"; print(html_str)
+
+from django.template import Template, Context
+
+with open(r'C:\WORK\cs50_python_js\0_project_1\wiki\encyclopedia\templates\encyclopedia\unordered_list.html', "r") as fhtml:
+    template_str = fhtml.read()
+
+template = Template(template_str)
+context = Context({"elements": elements_list})
+rendered = template.render(context)
+print("rendered:", rendered)
+
 
 ###########################################################
 

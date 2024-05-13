@@ -68,5 +68,7 @@ def markdown_to_html_body(filestr, verbose=False):
         print()
         print("HTML:")
         print(file_html_body)
+    
+    
 
     return file_html_body
