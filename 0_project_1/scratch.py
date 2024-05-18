@@ -158,3 +158,19 @@ The most recent major version of HTML is HTML5.
 Python is a programming language that can be used both for writing **command-line scripts** or building **web applications**.
 
 """
+
+######################################################
+
+filename = r"C:\Tiarles\cs50_python_js\0_project_1\wiki\entries\HTML.md"
+
+with open(filename, "r") as file:
+    html_str = file.read()
+
+# print(repr(html_str))
+
+for line in open(filename, "r"):
+    # print(line)
+    print(repr(line))
+
+
+    
