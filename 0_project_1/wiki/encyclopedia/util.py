@@ -54,23 +54,6 @@ def _unoredered_list_converter(string):
 
     ul_flag = False
 
-    # if with_html_template:
-    #     html_string_l = [
-    #         '<!DOCTYPE html>',
-    #         '<html lang="en">',
-    #         '<head>',
-    #         '<title>{title}</title>',
-    #         '</head>',
-    #         '<body>',
-    #         '{body}',
-    #         '</body>',
-    #         '</html>',
-    #     ]
-
-    #     html_string = '\n'.join(html_string_l)
-    # else:
-    # html_string = ""
-
     html_body = []
 
     for i, line in enumerate(lines):
@@ -89,11 +72,6 @@ def _unoredered_list_converter(string):
         else:
             html_body.append(line)
 
-    # if with_html_template:
-        # html_string_build = html_string.format(title=title, body='\n'.join(html_body))
-        # return html_string_build
-    # else:
-    # print("html_body:", html_body)
     html_body = '\n'.join(html_body)
     return html_body
 
