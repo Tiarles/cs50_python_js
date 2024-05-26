@@ -44,31 +44,106 @@ def get_entry(title):
     except FileNotFoundError:
         return None
 
+#
+# My new functions
+#
+
+def _unoredered_list_converter(string):
+    ul_pattern = re.compile(r'^\s*[-\*\+] (.*)')
+    lines = string.split('\n')
+
+    ul_flag = False
+
+    # if with_html_template:
+    #     html_string_l = [
+    #         '<!DOCTYPE html>',
+    #         '<html lang="en">',
+    #         '<head>',
+    #         '<title>{title}</title>',
+    #         '</head>',
+    #         '<body>',
+    #         '{body}',
+    #         '</body>',
+    #         '</html>',
+    #     ]
+
+    #     html_string = '\n'.join(html_string_l)
+    # else:
+    # html_string = ""
+
+    html_body = []
+
+    for i, line in enumerate(lines):
+        m = ul_pattern.match(line)
+        
+        if m is not None: 
+            if not ul_flag:
+                ul_flag = True
+                html_body.append("<ul>")
+
+            html_body.append(f"<li>{m.group(1)}</li>")
+
+            if ul_pattern.match(lines[i+1]) is None:
+                ul_flag = False
+                html_body.append("</ul>")
+        else:
+            html_body.append(line)
+
+    # if with_html_template:
+        # html_string_build = html_string.format(title=title, body='\n'.join(html_body))
+        # return html_string_build
+    # else:
+    # print("html_body:", html_body)
+    html_body = '\n'.join(html_body)
+    return html_body
+
+
+# def add_html_template(body, title):
+#     html_string_l = [
+#         '<!DOCTYPE html>',
+#         '<html lang="en">',
+#         '<head>',
+#         '<title>{title}</title>',
+#         '</head>',
+#         '<body>',
+#         '{body}',
+#         '</body>',
+#         '</html>',
+#     ]
+
+#     html_string = '\n'.join(html_string_l)
+
+#     html_string_build = html_string.format(title=title, body=body)
+
+#     return html_string_build
+
 
 def markdown_to_html_body(filestr, verbose=False):
-    patterns = [
-        (re.compile('^# (.*)', re.M),             r'<h1>\1</h1>'),
-        (re.compile('^## (.*)', re.M),            r'<h2>\1</h2>'),
-        (re.compile('^### (.*)', re.M),           r'<h3>\1</h3>'),
-        (re.compile('^#### (.*)', re.M),          r'<h4>\1</h4>'),
-        (re.compile('^##### (.*)', re.M),         r'<h5>\1</h5>'),
-        (re.compile('^###### (.*)', re.M),        r'<h6>\1</h6>'),
-        (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>'),
-        (re.compile(R'\*\*(.*?)\*\*', re.M),      r'<strong>\1</strong>'),
-    ]
+    patterns = { # 1/2 Replacements
+        "h1":     (re.compile('^# (.*)', re.M),             r'<h1>\1</h1>'),
+        "h2":     (re.compile('^## (.*)', re.M),            r'<h2>\1</h2>'),
+        "h3":     (re.compile('^### (.*)', re.M),           r'<h3>\1</h3>'),
+        "h4":     (re.compile('^#### (.*)', re.M),          r'<h4>\1</h4>'),
+        "h5":     (re.compile('^##### (.*)', re.M),         r'<h5>\1</h5>'),
+        "h6":     (re.compile('^###### (.*)', re.M),        r'<h6>\1</h6>'),
+        "a":      (re.compile(R'\[(.*?)\]\((.*?)\)', re.M), r'<a href="\2">\1</a>'),
+        "strong": (re.compile(R'\*\*(.*?)\*\*', re.M),      r'<strong>\1</strong>'),
+    }
 
     file_html_body = filestr
 
-    for pattern, sub_str in patterns:
+    for key in patterns:
+        pattern, sub_str = patterns[key]
         file_html_body = pattern.sub(sub_str, file_html_body)
-
+    
+    # Checking unordered list and add HTML Template
+    file_html_body = _unoredered_list_converter(file_html_body)
+    
     if verbose:
         print("Markdown:")
         print(filestr)
         print()
         print("HTML:")
         print(file_html_body)
-    
-    
 
     return file_html_body
