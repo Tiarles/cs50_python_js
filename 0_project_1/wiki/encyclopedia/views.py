@@ -24,12 +24,17 @@ def index(request):
 def entries(request, title):
     title_cap = title.capitalize()
     filestr_md = util.get_entry(title_cap)
-    file_html_body = util.markdown_to_html_body(filestr_md)
+    if filestr_md is None:
+        return render(request, "encyclopedia\error_404.html", {
+            "title": title
+        })
+    else:
+        file_html_body = util.markdown_to_html_body(filestr_md)
 
-    return render(request, "encyclopedia\entries_struct.html", {
-        "title": title_cap,
-        "body": file_html_body,
-    })
+        return render(request, "encyclopedia\entries_struct.html", {
+            "title": title_cap,
+            "body": file_html_body,
+        })
 
 def tmp(request):
     return HttpResponse("Not found!")

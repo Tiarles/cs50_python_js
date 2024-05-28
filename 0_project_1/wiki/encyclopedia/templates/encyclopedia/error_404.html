@@ -1,11 +1,9 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{ title }}
+    Not Found
 {% endblock %}
 
 {% block body %}
-    {% autoescape off %}
-        {{ body }}
-    {% endautoescape %}
+    <h1>Page for "{{ title }}" not found!</h1>
 {% endblock %}
