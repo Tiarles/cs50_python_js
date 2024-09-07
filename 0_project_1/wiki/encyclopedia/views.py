@@ -36,5 +36,21 @@ def entries(request, title):
             "body": file_html_body,
         })
 
-def tmp(request):
-    return HttpResponse("Not found!")
+def new_page(request):
+    # title_cap = title.capitalize()
+    # filestr_md = util.get_entry(title_cap)
+    # if filestr_md is None:
+    #     return render(request, "encyclopedia\error_404.html", {
+    #         "title": title
+    #     })
+    # else:
+    #     file_html_body = util.markdown_to_html_body(filestr_md)
+
+        return render(request, R"encyclopedia\new_page.html", {
+            # "title": title_cap,
+            # "body": file_html_body,
+        })
+
+
+def random_page(request):
+    return HttpResponse("Random Page")
