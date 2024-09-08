@@ -4,18 +4,18 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
 
-def list_entries():
+def list_entries(capitalize=False):
     """
     Returns a list of all names of encyclopedia entries.
     """
     _, filenames = default_storage.listdir("entries")
     
-    print("filenames:", filenames)
-
     ret = list(sorted(re.sub(r"\.md$", "", filename)
                 for filename in filenames if filename.endswith(".md")))
 
-    print("ret: ", ret)
+    if capitalize:
+        for i, entry in enumerate(ret):
+            ret[i] = entry.capitalize()
 
     return ret
 
@@ -76,26 +76,6 @@ def _unoredered_list_converter(string):
     return html_body
 
 
-# def add_html_template(body, title):
-#     html_string_l = [
-#         '<!DOCTYPE html>',
-#         '<html lang="en">',
-#         '<head>',
-#         '<title>{title}</title>',
-#         '</head>',
-#         '<body>',
-#         '{body}',
-#         '</body>',
-#         '</html>',
-#     ]
-
-#     html_string = '\n'.join(html_string_l)
-
-#     html_string_build = html_string.format(title=title, body=body)
-
-#     return html_string_build
-
-
 def markdown_to_html_body(filestr, verbose=False):
     patterns = { # 1/2 Replacements
         "h1":     (re.compile('^# (.*)', re.M),             r'<h1>\1</h1>'),
@@ -123,5 +103,15 @@ def markdown_to_html_body(filestr, verbose=False):
         print()
         print("HTML:")
         print(file_html_body)
+
+    return file_html_body
+
+
+def render_markdown(title):
+    title_cap = title.capitalize()
+    filestr_md = get_entry(title_cap)
+
+    if filestr_md is not None:
+        file_html_body = markdown_to_html_body(filestr_md)
 
     return file_html_body

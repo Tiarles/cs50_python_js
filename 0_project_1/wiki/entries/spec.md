@@ -1,3 +1,6 @@
+# References
+- https://cs50.harvard.edu/web/2020/weeks/3/
+- https://cs50.harvard.edu/web/2020/projects/1/
 # Specification
 <p>Complete the implementation of your Wiki encyclopedia. You must fulfill the following requirements:</p>
 
@@ -13,7 +16,7 @@
   <del><li data-marker="*"><strong>Index Page</strong>: Update <code class="language-plaintext highlighter-rouge">index.html</code> such that, instead of merely listing the names of all pages in the encyclopedia, user can click on any entry name to be taken directly to that entry page.</li></del>
   <li data-marker="*"><strong>Search</strong>: Allow the user to type a query into the search box in the sidebar to search for an encyclopedia entry.
     <ul>
-      <li data-marker="*">If the query matches the name of an encyclopedia entry, the user should be redirected to that entry’s page.</li>
+      <del><li data-marker="*">If the query matches the name of an encyclopedia entry, the user should be redirected to that entry’s page.</li></del>
       <li data-marker="*">If the query does not match the name of an encyclopedia entry, the user should instead be taken to a search results page that displays a list of all encyclopedia entries that have the query as a substring. For example, if the search query were <code class="language-plaintext highlighter-rouge">ytho</code>, then <code class="language-plaintext highlighter-rouge">Python</code> should appear in the search results.</li>
       <li data-marker="*">Clicking on any of the entry names on the search results page should take the user to that entry’s page.</li>
     </ul>
