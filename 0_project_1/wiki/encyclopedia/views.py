@@ -7,19 +7,12 @@ from . import util
 
 
 def index(request):
+    search_topic = request.GET.get('q')  # Get the "Search Encyclopedia" form.
+    print(f"q: {q}")
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })
 
-
-# def css(request):
-#     filestr_md = util.get_entry("CSS")
-#     file_html_body = util.markdown_to_html_body(filestr_md, verbose=False)
-
-#     return render(request, "encyclopedia\entries_struct.html", {
-#         "title": "CSS",
-#         "body": file_html_body,
-#     })
 
 def entries(request, title):
     title_cap = title.capitalize()
@@ -35,6 +28,7 @@ def entries(request, title):
             "title": title_cap,
             "body": file_html_body,
         })
+
 
 def new_page(request):
     # title_cap = title.capitalize()
