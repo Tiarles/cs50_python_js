@@ -116,6 +116,6 @@ def render_markdown(title):
     filestr_md = get_entry(title_cap)
 
     if filestr_md is not None:
-        file_html_body = markdown_to_html_body(filestr_md)
-
-    return file_html_body
+        return markdown_to_html_body(filestr_md)
+    else:
+        return None
