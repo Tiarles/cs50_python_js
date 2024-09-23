@@ -66,17 +66,22 @@ def index(request):
 
 
 def entries(request, title):
-    file_html_body = util.render_markdown(title)
-
-    if file_html_body is None:
-        return render(request, "encyclopedia\error_404.html", {
-            "title": title
-        })
+    entry_request = get_searched_title(request)
+    if entry_request:
+        # Implement entry request for the "Search Encyclopedia" also for the new_page
+        return entry_request
     else:
-        return render(request, "encyclopedia\entries_struct.html", {
-            "title": title,
-            "body": file_html_body,
-        })
+        file_html_body = util.render_markdown(title)
+
+        if file_html_body is None:
+            return render(request, "encyclopedia\error_404.html", {
+                "title": title
+            })
+        else:
+            return render(request, "encyclopedia\entries_struct.html", {
+                "title": title,
+                "body": file_html_body,
+            })
 
 
 def random_page(request):

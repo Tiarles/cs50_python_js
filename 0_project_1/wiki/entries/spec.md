@@ -14,13 +14,13 @@
   </li></del>
   
   <del><li data-marker="*"><strong>Index Page</strong>: Update <code class="language-plaintext highlighter-rouge">index.html</code> such that, instead of merely listing the names of all pages in the encyclopedia, user can click on any entry name to be taken directly to that entry page.</li></del>
-  <li data-marker="*"><strong>Search</strong>: Allow the user to type a query into the search box in the sidebar to search for an encyclopedia entry.
+  <del><li data-marker="*"><strong>Search</strong>: Allow the user to type a query into the search box in the sidebar to search for an encyclopedia entry.
     <ul>
       <del><li data-marker="*">If the query matches the name of an encyclopedia entry, the user should be redirected to that entry’s page.</li></del>
       <li data-marker="*">If the query does not match the name of an encyclopedia entry, the user should instead be taken to a search results page that displays a list of all encyclopedia entries that have the query as a substring. For example, if the search query were <code class="language-plaintext highlighter-rouge">ytho</code>, then <code class="language-plaintext highlighter-rouge">Python</code> should appear in the search results.</li>
       <li data-marker="*">Clicking on any of the entry names on the search results page should take the user to that entry’s page.</li>
     </ul>
-  </li>
+  </li></del>
   <li data-marker="*"><strong>New Page</strong>: Clicking “Create New Page” in the sidebar should take the user to a page where they can create a new encyclopedia entry.
     <ul>
       <li data-marker="*">Users should be able to enter a title for the page and, in a <a href="https://www.w3schools.com/tags/tag_textarea.asp"><code class="language-plaintext highlighter-rouge">textarea</code></a>, should be able to enter the Markdown content for the page.</li>
