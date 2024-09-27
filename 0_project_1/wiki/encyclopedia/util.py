@@ -113,7 +113,11 @@ def markdown_to_html_body(filestr, verbose=False):
 
 def render_markdown(title):
     title_cap = title.capitalize()
+    print()
+    print(F"title_cap: {title_cap}")
+    # print(file_html_body)
     filestr_md = get_entry(title_cap)
+    print(f"filestr_md: {filestr_md}")
 
     if filestr_md is not None:
         return markdown_to_html_body(filestr_md)

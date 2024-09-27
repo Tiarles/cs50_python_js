@@ -71,13 +71,27 @@ def entries(request, title):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
+        print()
+        print(f"title: {title}")
+        print()
         file_html_body = util.render_markdown(title)
-
+        print(f"file_html_body: {file_html_body}")
+        print()
         if file_html_body is None:
             return render(request, "encyclopedia\error_404.html", {
                 "title": title
             })
         else:
+            print(f"return title: {title}")
+            print()
+            print()
+            print()
+            print()
+            print(f"file_html_body: {file_html_body[:1000]}")
+            print()
+            print()
+            print()
+            print()
             return render(request, "encyclopedia\entries_struct.html", {
                 "title": title,
                 "body": file_html_body,
@@ -110,3 +124,28 @@ def new_page(request):
         return entry_request
     else:
         return render(request, R"encyclopedia\new_page.html", {})
+
+
+def tutorial_spec(request):
+    # entry_request = get_searched_title(request)
+    # if entry_request:
+    #     # Implement entry request for the "Search Encyclopedia" also for the new_page
+    #     return entry_request
+    # else:
+    #     entry = util.get_entry("Tutorial Specification")
+    #     print()
+    #     print(entry)
+    #     print()
+    #     # search_topic_low = search_topic.lower()
+    #     return render(request, "encyclopedia\entries_struct.html" {
+    #         "title": "Tutorial Specification",
+    #         "body": file_html_body,
+    #     })
+    # file_html_body = util.render_markdown(title)
+
+    # return render(request, "encyclopedia\entries_struct.html", {
+    #     "title": "Tutorial Specification",
+    #     "body": ,
+    # })
+
+    return entries(request, "Tutorial Specification")
