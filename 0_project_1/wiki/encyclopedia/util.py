@@ -4,7 +4,7 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 
 
-def list_entries(capitalize=False):
+def list_entries(format=None):
     """
     Returns a list of all names of encyclopedia entries.
     """
@@ -12,10 +12,14 @@ def list_entries(capitalize=False):
     
     ret = list(sorted(re.sub(r"\.md$", "", filename)
                 for filename in filenames if filename.endswith(".md")))
-
-    if capitalize:
+    
+    if format == "capitalize":
         for i, entry in enumerate(ret):
             ret[i] = entry.capitalize()
+
+    elif format == "lower":
+        for i, entry in enumerate(ret):
+            ret[i] = entry.lower()
 
     return ret
 
@@ -112,6 +116,6 @@ def render_markdown(title):
     filestr_md = get_entry(title_cap)
 
     if filestr_md is not None:
-        file_html_body = markdown_to_html_body(filestr_md)
-
-    return file_html_body
+        return markdown_to_html_body(filestr_md)
+    else:
+        return None
