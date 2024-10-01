@@ -72,27 +72,13 @@ def entries(request, title):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        print()
-        print(f"title: {title}")
-        print()
         file_html_body = util.render_markdown(title)
-        print(f"file_html_body: {file_html_body}")
-        print()
+
         if file_html_body is None:
             return render(request, "encyclopedia\error_404.html", {
                 "title": title
             })
         else:
-            print(f"return title: {title}")
-            print()
-            print()
-            print()
-            print()
-            print(f"file_html_body: {file_html_body[:1000]}")
-            print()
-            print()
-            print()
-            print()
             return render(request, "encyclopedia\entries_struct.html", {
                 "title": title,
                 "body": file_html_body,
