@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -127,25 +128,10 @@ def new_page(request):
 
 
 def tutorial_spec(request):
-    # entry_request = get_searched_title(request)
-    # if entry_request:
-    #     # Implement entry request for the "Search Encyclopedia" also for the new_page
-    #     return entry_request
-    # else:
-    #     entry = util.get_entry("Tutorial Specification")
-    #     print()
-    #     print(entry)
-    #     print()
-    #     # search_topic_low = search_topic.lower()
-    #     return render(request, "encyclopedia\entries_struct.html" {
-    #         "title": "Tutorial Specification",
-    #         "body": file_html_body,
-    #     })
-    # file_html_body = util.render_markdown(title)
+    f = default_storage.open(f"entries/Tutorial Specification.html")
+    html_body = f.read().decode("utf-8")
 
-    # return render(request, "encyclopedia\entries_struct.html", {
-    #     "title": "Tutorial Specification",
-    #     "body": ,
-    # })
-
-    return entries(request, "Tutorial Specification")
+    return render(request, "encyclopedia\entries_struct.html", {
+        "title": "Tutorial Specification",
+        "body": html_body,
+    })
