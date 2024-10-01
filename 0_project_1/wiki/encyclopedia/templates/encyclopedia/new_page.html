@@ -1,23 +1,21 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Not Found
+    Create a new page
 {% endblock %}
 
 {% block body %}
     <h1>Create a new page</h1>
     <div>
-        <input placeholder="Title"></input>    
+        <input id="create_new_page__title" placeholder="Title"></input>    
     </div>
 
     <div>
-        <textarea name="new_page_content">
-Write the markdown content here!
-        </textarea>
+        <textarea id="create_new_page__textare" style="margin-left: 20px; height: 500px" name="new_page_content"></textarea>
     </div>
 
     <div>
-        <button>Save entry</button>
+        <button id="" style="margin: 20px 0 0 20px;">Save entry</button>
     </div>
     
 

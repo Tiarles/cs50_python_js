@@ -36,3 +36,13 @@ textarea {
 .sidebar h2 {
     margin-top: 5px;
 }
+
+#create_new_page__title {
+    margin: 100px 0 20px 20px;
+    width: 50%;
+}
+
+#create_new_page__textare {
+    margin-left: 20px;
+    height: 500px;
+}
