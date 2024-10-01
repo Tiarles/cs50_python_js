@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -113,4 +114,10 @@ def new_page(request):
 
 
 def tutorial_spec(request):
-    return render(request, R"encyclopedia\Tutorial Specification.html")
+    f = default_storage.open(f"entries/Tutorial Specification.html")
+    html_body = f.read().decode("utf-8")
+
+    return render(request, "encyclopedia\entries_struct.html", {
+        "title": "Tutorial Specification",
+        "body": html_body,
+    })
