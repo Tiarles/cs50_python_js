@@ -1,7 +1,6 @@
 from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.http import HttpResponse
-
 from django.template import Context  # , Template
 
 from . import util
@@ -110,7 +109,25 @@ def new_page(request):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        return render(request, R"encyclopedia\new_page.html", {})
+        from django import forms
+
+        class NewEntry(forms.Form):
+            title = forms.CharField(label="title", widget=forms.TextInput(attrs={"id": "create_new_page__title", "placeholder": "Title"}))
+            content = forms.CharField(label="content", widget=forms.Textarea(attrs={"name": "new_page_content", "id": "create_new_page__textarea"}))
+
+        if request.method == "POST":
+            form_entry = NewEntry(request.POST)
+
+            if form_entry.is_valid():
+                title = form_entry.cleaned_data["title"]
+                content = form_entry.cleaned_data["content"]
+
+                print(f"title: {title}")
+                print(f"content: {content}")
+
+        return render(request, R"encyclopedia\new_page.html", {
+            "form": NewEntry()
+        })
 
 
 def tutorial_spec(request):

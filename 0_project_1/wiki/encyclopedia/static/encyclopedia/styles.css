@@ -14,7 +14,7 @@ h1 {
 
 textarea {
     height: 90vh;
-    width: 80%;
+    width: 10%;
 }
 
 .main {
@@ -38,11 +38,16 @@ textarea {
 }
 
 #create_new_page__title {
-    margin: 100px 0 20px 20px;
+    margin: 40px 0 20px 20px;
     width: 50%;
 }
 
-#create_new_page__textare {
+#create_new_page__textarea {
     margin-left: 20px;
+    width: 80%;
     height: 500px;
+}
+
+#create_new_page__save {
+    margin: 20px 0 0 20px;
 }

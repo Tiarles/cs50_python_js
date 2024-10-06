@@ -6,17 +6,15 @@
 
 {% block body %}
     <h1>Create a new page</h1>
-    <div>
-        <input id="create_new_page__title" placeholder="Title"></input>    
-    </div>
 
-    <div>
-        <textarea id="create_new_page__textare" style="margin-left: 20px; height: 500px" name="new_page_content"></textarea>
-    </div>
+    <form action="{% url 'new_page' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                {{ field }}
+            </div>
+        {% endfor %}
 
-    <div>
-        <button id="" style="margin: 20px 0 0 20px;">Save entry</button>
-    </div>
-    
-
+        <div><input type="submit"></div>
+    </form>
 {% endblock %}
