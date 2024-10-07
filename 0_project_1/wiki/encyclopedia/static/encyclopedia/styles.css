@@ -14,7 +14,7 @@ h1 {
 
 textarea {
     height: 90vh;
-    width: 10%;
+    width: 80%;
 }
 
 .main {
@@ -44,7 +44,6 @@ textarea {
 
 #create_new_page__textarea {
     margin-left: 20px;
-    width: 80%;
     height: 500px;
 }
 

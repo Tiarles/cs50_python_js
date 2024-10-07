@@ -1,9 +1,17 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Not Found
+    {% if context == "exist" %}
+        Page already exist
+    {% else %}
+        Not Found
+    {% endif %}
 {% endblock %}
 
 {% block body %}
+    {% if context == "exist" %}
+    <h1>Page with title "{{ title }}" already exists.</h1>
+    {% else %}
     <h1>No matches or page not found for "{{ title }}".</h1>
+    {% endif %}
 {% endblock %}

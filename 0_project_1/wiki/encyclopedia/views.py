@@ -122,8 +122,21 @@ def new_page(request):
                 title = form_entry.cleaned_data["title"]
                 content = form_entry.cleaned_data["content"]
 
-                print(f"title: {title}")
-                print(f"content: {content}")
+                list_entries_low = util.list_entries(format="lower")
+
+                if title.lower() in list_entries_low:
+                    return render(request, "encyclopedia\error_404.html", {
+                        "title": title,
+                        "context": "exist"
+                    })
+
+                util.save_entry(title, content)
+                file_html_body = util.render_markdown(title)
+            
+                return render(request, "encyclopedia\entries_struct.html", {
+                    "title": title,
+                    "body": file_html_body,
+                })
 
         return render(request, R"encyclopedia\new_page.html", {
             "form": NewEntry()
