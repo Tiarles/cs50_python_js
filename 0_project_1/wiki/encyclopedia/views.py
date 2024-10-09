@@ -71,6 +71,7 @@ def entries(request, title):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
+        request.session["title"] = title
         file_html_body = util.render_markdown(title)
 
         if file_html_body is None:
@@ -85,22 +86,28 @@ def entries(request, title):
 
 
 def random_page(request):
-    entry_request = get_searched_title(request)
-    if entry_request:
-        # Implement entry request for the "Search Encyclopedia" also for the random page
-        return entry_request
-    else:
-        import random
+    import random
+    title = random.choice(util.list_entries())
 
-        title = random.choice(util.list_entries())
-        title_cap = title.capitalize()
-        filestr_md = util.get_entry(title_cap)
-        file_html_body = util.markdown_to_html_body(filestr_md)
+    return entries(request, title)
 
-        return render(request, "encyclopedia\entries_struct.html", {
-            "title": title_cap,
-            "body": file_html_body,
-        })
+    # entry_request = get_searched_title(request)
+    # if entry_request:
+    #     # Implement entry request for the "Search Encyclopedia" also for the random page
+    #     return entry_request
+    # else:
+    #     
+    #     import random
+    #     title = random.choice(util.list_entries())
+    #     request.session["title"] = title
+    #     title_cap = title.capitalize()
+    #     filestr_md = util.get_entry(title_cap)
+    #     file_html_body = util.markdown_to_html_body(filestr_md)
+
+    #     return render(request, "encyclopedia\entries_struct.html", {
+    #         "title": title_cap,
+    #         "body": file_html_body,
+    #     })
 
 
 def new_page(request):

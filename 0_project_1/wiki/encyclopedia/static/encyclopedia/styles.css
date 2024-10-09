@@ -50,3 +50,8 @@ textarea {
 #create_new_page__save {
     margin: 20px 0 0 20px;
 }
+
+#edit_page {
+    text-align: right;
+    color: yellow;
+}
