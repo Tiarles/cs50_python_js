@@ -7,30 +7,28 @@
 <p>Complete the implementation of your Wiki encyclopedia. You must fulfill the following requirements:</p>
 
 <ul>
-  <del><li data-marker="*"><strong>Entry Page</strong>: Visiting <code class="language-plaintext highlighter-rouge">/wiki/TITLE</code>, where <code class="language-plaintext highlighter-rouge">TITLE</code> is the title of an encyclopedia entry, should render a page that displays the contents of that encyclopedia entry.
+  <li data-marker="*"><del><strong>Entry Page</strong>: Visiting <code class="language-plaintext highlighter-rouge">/wiki/TITLE</code>, where <code class="language-plaintext highlighter-rouge">TITLE</code> is the title of an encyclopedia entry, should render a page that displays the contents of that encyclopedia entry.</del></li>
     <ul>
-      <del><li data-marker="*">The view should get the content of the encyclopedia entry by calling the appropriate <code class="language-plaintext highlighter-rouge">util</code> function.</li></del>
-      <del><li data-marker="*">If an entry is requested that does not exist, the user should be presented with an error page indicating that their requested page was not found.</li></del>
-      <del><li data-marker="*">If the entry does exist, the user should be presented with a page that displays the content of the entry. The title of the page should include the name of the entry.</li></del>
+      <li data-marker="*"><del>The view should get the content of the encyclopedia entry by calling the appropriate <code class="language-plaintext highlighter-rouge">util</code> function.</del></li>
+      <li data-marker="*"><del>If an entry is requested that does not exist, the user should be presented with an error page indicating that their requested page was not found.</del></li>
+      <li data-marker="*"><del>If the entry does exist, the user should be presented with a page that displays the content of the entry. The title of the page should include the name of the entry.</del></li>
     </ul>
-  </li></del>
-  
-  <del><li data-marker="*"><strong>Index Page</strong>: Update <code class="language-plaintext highlighter-rouge">index.html</code> such that, instead of merely listing the names of all pages in the encyclopedia, user can click on any entry name to be taken directly to that entry page.</li></del>
-  <del><li data-marker="*"><strong>Search</strong>: Allow the user to type a query into the search box in the sidebar to search for an encyclopedia entry.
+  <li data-marker="*"><del><strong>Index Page</strong>: Update <code class="language-plaintext highlighter-rouge">index.html</code> such that, instead of merely listing the names of all pages in the encyclopedia, user can click on any entry name to be taken directly to that entry page.</del></li>
+  <li data-marker="*"><del><strong>Search</strong>: Allow the user to type a query into the search box in the sidebar to search for an encyclopedia entry.</del>
     <ul>
-      <del><li data-marker="*">If the query matches the name of an encyclopedia entry, the user should be redirected to that entry’s page.</li></del>
+      <li data-marker="*"><del></del>If the query matches the name of an encyclopedia entry, the user should be redirected to that entry’s page.</del></li>
       <li data-marker="*">If the query does not match the name of an encyclopedia entry, the user should instead be taken to a search results page that displays a list of all encyclopedia entries that have the query as a substring. For example, if the search query were <code class="language-plaintext highlighter-rouge">ytho</code>, then <code class="language-plaintext highlighter-rouge">Python</code> should appear in the search results.</li>
       <li data-marker="*">Clicking on any of the entry names on the search results page should take the user to that entry’s page.</li>
     </ul>
-  </li></del>
-  <del><li data-marker="*"><strong>New Page</strong>: Clicking “Create New Page” in the sidebar should take the user to a page where they can create a new encyclopedia entry.
+  </li>
+  <li data-marker="*"><del></del><strong>New Page</strong>: Clicking “Create New Page” in the sidebar should take the user to a page where they can create a new encyclopedia entry.</del></li>
     <ul>
-      <del><li data-marker="*">Users should be able to enter a title for the page and, in a <a href="https://www.w3schools.com/tags/tag_textarea.asp"><code class="language-plaintext highlighter-rouge">textarea</code></a>, should be able to enter the Markdown content for the page.</li></del>
-      <del><li data-marker="*">Users should be able to click a button to save their new page.</li></del>
-      <del><li data-marker="*">When the page is saved, if an encyclopedia entry already exists with the provided title, the user should be presented with an error message.</li></del>
-      <del><li data-marker="*">Otherwise, the encyclopedia entry should be saved to disk, and the user should be taken to the new entry’s page.</li></del>
+      <li data-marker="*"><del></del>Users should be able to enter a title for the page and, in a <a href="https://www.w3schools.com/tags/tag_textarea.asp"><code class="language-plaintext highlighter-rouge">textarea</code></a>, should be able to enter the Markdown content for the page.</del></li>
+      <li data-marker="*"><del></del>Users should be able to click a button to save their new page.</del></li>
+      <li data-marker="*"><del></del>When the page is saved, if an encyclopedia entry already exists with the provided title, the user should be presented with an error message.</del></li>
+      <li data-marker="*"><del></del>Otherwise, the encyclopedia entry should be saved to disk, and the user should be taken to the new entry’s page.</del></li>
     </ul>
-  </li></del>
+  </li>
   <li data-marker="*"><strong>Edit Page</strong>: On each entry page, the user should be able to click a link to be taken to a page where the user can edit that entry’s Markdown content in a <code class="language-plaintext highlighter-rouge">textarea</code>.
     <ul>
       <li data-marker="*">The <code class="language-plaintext highlighter-rouge">textarea</code> should be pre-populated with the existing Markdown content of the page. (i.e., the existing content should be the initial <code class="language-plaintext highlighter-rouge">value</code> of the <code class="language-plaintext highlighter-rouge">textarea</code>).</li>
