@@ -1,3 +1,0 @@
-# Trabalho
-
-ALGO QUE TODO **MUNDO** ODEIA FAZER.
