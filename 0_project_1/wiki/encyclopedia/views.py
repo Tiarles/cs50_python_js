@@ -163,14 +163,14 @@ def edit_page(request, title):
             form_entry = NewEntry(request.POST)
 
             if form_entry.is_valid():
-                title = form_entry.cleaned_data["title"]
-                content = form_entry.cleaned_data["content"]; print(f"POST content: {content}")
+                title_post = form_entry.cleaned_data["title"]
+                content = form_entry.cleaned_data["content"]
 
-                util.save_entry(title, bytes(content, "utf8"))
-                file_html_body = util.render_markdown(title)
+                util.save_entry(title_post, bytes(content, "utf8"))
+                file_html_body = util.render_markdown(title_post)
             
                 return render(request, "encyclopedia\entries_struct.html", {
-                    "title": title,
+                    "title": title_post,
                     "body": file_html_body,
                 })
 
@@ -182,13 +182,3 @@ def edit_page(request, title):
             "title": title,
             "form": form_entry_2,
         })
-
-
-def tutorial_spec(request):
-    f = default_storage.open(f"entries/Tutorial Specification.html")
-    html_body = f.read().decode("utf-8")
-
-    return render(request, "encyclopedia\entries_struct.html", {
-        "title": "Tutorial Specification",
-        "body": html_body,
-    })
