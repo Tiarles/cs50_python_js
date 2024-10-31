@@ -2,9 +2,33 @@ from django.core.files.storage import default_storage
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import Context  # , Template
+from django import forms
 
 from . import util
 
+# Form entry class
+
+class NewEntry(forms.Form):
+    title = forms.CharField(
+        label="title",
+        widget=forms.TextInput(
+            attrs={
+                "id": "create_new_page__title",
+                "placeholder": "Title"
+            }
+        )
+    )
+    content = forms.CharField(
+        label="content",
+        widget=forms.Textarea(
+            attrs={
+                # "name": "new_page_content",
+                "id": "create_new_page__textarea"
+            }
+        )
+    )
+
+# Search Encyclopedia request treatment
 
 def get_searched_title(request):
     """Function used for all the vies to implement request 
@@ -24,7 +48,8 @@ def get_searched_title(request):
 
     if search_topic_valid:
         # Show the searched page
-        file_html_body = util.render_markdown(title=search_topic_low.capitalize())
+        title = search_topic_low.capitalize()
+        file_html_body = util.render_markdown(title=title)
 
         return render(request, "encyclopedia\entries_struct.html", {
             "title": search_topic,
@@ -50,6 +75,7 @@ def get_searched_title(request):
                 "entries": matches
             })
 
+# Views
 
 def index(request):
     entry_request = get_searched_title(request)
@@ -85,22 +111,10 @@ def entries(request, title):
 
 
 def random_page(request):
-    entry_request = get_searched_title(request)
-    if entry_request:
-        # Implement entry request for the "Search Encyclopedia" also for the random page
-        return entry_request
-    else:
-        import random
+    import random
+    title = random.choice(util.list_entries())
 
-        title = random.choice(util.list_entries())
-        title_cap = title.capitalize()
-        filestr_md = util.get_entry(title_cap)
-        file_html_body = util.markdown_to_html_body(filestr_md)
-
-        return render(request, "encyclopedia\entries_struct.html", {
-            "title": title_cap,
-            "body": file_html_body,
-        })
+    return entries(request, title)
 
 
 def new_page(request):
@@ -109,12 +123,6 @@ def new_page(request):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        from django import forms
-
-        class NewEntry(forms.Form):
-            title = forms.CharField(label="title", widget=forms.TextInput(attrs={"id": "create_new_page__title", "placeholder": "Title"}))
-            content = forms.CharField(label="content", widget=forms.Textarea(attrs={"name": "new_page_content", "id": "create_new_page__textarea"}))
-
         if request.method == "POST":
             form_entry = NewEntry(request.POST)
 
@@ -130,7 +138,7 @@ def new_page(request):
                         "context": "exist"
                     })
 
-                util.save_entry(title, content)
+                util.save_entry(title, bytes(content, "utf8"))
                 file_html_body = util.render_markdown(title)
             
                 return render(request, "encyclopedia\entries_struct.html", {
@@ -140,6 +148,39 @@ def new_page(request):
 
         return render(request, R"encyclopedia\new_page.html", {
             "form": NewEntry()
+        })
+
+
+def edit_page(request, title):
+    entry_request = get_searched_title(request)
+    if entry_request:
+        # Implement entry request for the "Search Encyclopedia" also for the new_page
+        return entry_request
+    else:
+        content = util.get_entry(title)
+
+        if request.method == "POST":
+            form_entry = NewEntry(request.POST)
+
+            if form_entry.is_valid():
+                title = form_entry.cleaned_data["title"]
+                content = form_entry.cleaned_data["content"]; print(f"POST content: {content}")
+
+                util.save_entry(title, bytes(content, "utf8"))
+                file_html_body = util.render_markdown(title)
+            
+                return render(request, "encyclopedia\entries_struct.html", {
+                    "title": title,
+                    "body": file_html_body,
+                })
+
+        form_entry_2 = NewEntry()
+        form_entry_2.fields['title'].initial = title
+        form_entry_2.fields['content'].initial = content
+
+        return render(request, R"encyclopedia\edit_page.html", {
+            "title": title,
+            "form": form_entry_2,
         })
 
 

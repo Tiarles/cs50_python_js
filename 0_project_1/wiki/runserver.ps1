@@ -1,2 +1,2 @@
-#python .\manage.py collectstatic
+..\..\venv\Scripts\activate
 python .\manage.py runserver

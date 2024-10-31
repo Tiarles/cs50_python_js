@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    <div id="edit_page"><a href="{% url 'edit_page' title=title %}">Edit this page</a></div>
     {% autoescape off %}
         {{ body }}
     {% endautoescape %}
