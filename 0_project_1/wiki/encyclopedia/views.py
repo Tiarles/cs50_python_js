@@ -6,6 +6,29 @@ from django import forms
 
 from . import util
 
+# Form entry class
+
+class NewEntry(forms.Form):
+    title = forms.CharField(
+        label="title",
+        widget=forms.TextInput(
+            attrs={
+                "id": "create_new_page__title",
+                "placeholder": "Title"
+            }
+        )
+    )
+    content = forms.CharField(
+        label="content",
+        widget=forms.Textarea(
+            attrs={
+                # "name": "new_page_content",
+                "id": "create_new_page__textarea"
+            }
+        )
+    )
+
+# Search Encyclopedia request treatment
 
 def get_searched_title(request):
     """Function used for all the vies to implement request 
@@ -25,7 +48,8 @@ def get_searched_title(request):
 
     if search_topic_valid:
         # Show the searched page
-        file_html_body = util.render_markdown(title=search_topic_low.capitalize())
+        title = search_topic_low.capitalize()
+        file_html_body = util.render_markdown(title=title)
 
         return render(request, "encyclopedia\entries_struct.html", {
             "title": search_topic,
@@ -51,6 +75,7 @@ def get_searched_title(request):
                 "entries": matches
             })
 
+# Views
 
 def index(request):
     entry_request = get_searched_title(request)
@@ -72,7 +97,6 @@ def entries(request, title):
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        request.session["title"] = title
         file_html_body = util.render_markdown(title)
 
         if file_html_body is None:
@@ -95,33 +119,10 @@ def random_page(request):
 
 def new_page(request):
     entry_request = get_searched_title(request)
-
     if entry_request:
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        class NewEntry(forms.Form):
-            title = forms.CharField(
-                label="title",
-                widget=forms.TextInput(
-                    attrs={
-                        "id": "create_new_page__title",
-                        "placeholder": "Title"
-                    }
-                )
-            )
-
-            content = forms.CharField(
-                label="content",
-                widget=forms.Textarea(
-                    attrs={
-                        "name": "new_page_content",
-                        "id": "create_new_page__textarea"
-                    }
-                )
-            )
-        # End of NewEntry class
-
         if request.method == "POST":
             form_entry = NewEntry(request.POST)
 
@@ -137,7 +138,7 @@ def new_page(request):
                         "context": "exist"
                     })
 
-                util.save_entry(title, content)
+                util.save_entry(title, bytes(content, "utf8"))
                 file_html_body = util.render_markdown(title)
             
                 return render(request, "encyclopedia\entries_struct.html", {
@@ -150,52 +151,36 @@ def new_page(request):
         })
 
 
-def edit_page(request):
+def edit_page(request, title):
     entry_request = get_searched_title(request)
-
     if entry_request:
         # Implement entry request for the "Search Encyclopedia" also for the new_page
         return entry_request
     else:
-        TITLE = request.session["title"]
-        CONTENT = util.get_entry(TITLE)
-
-        class EditEntry(forms.Form):
-            title = forms.CharField(
-                label="title",
-                widget=forms.TextInput(
-                    attrs={
-                        "id": "create_new_page__title",
-                        "placeholder": "Title (EditEntry)",
-                        "value": TITLE
-                    }
-                )
-            )
-
-            content = forms.CharField(
-                label="content",
-                widget=forms.Textarea(
-                    attrs={
-                        "name": "new_page_content",
-                        "id": "create_new_page__textarea",
-                        "value": "CONTENT"
-                    }
-                )
-            )
-        # End of EditEntry class
+        content = util.get_entry(title)
 
         if request.method == "POST":
-            form_entry = EditEntry(request.POST)
+            form_entry = NewEntry(request.POST)
 
             if form_entry.is_valid():
-                print()
-                print("views.edit_page:")
-                print("\tForm is VALID!")
-                print()
+                title = form_entry.cleaned_data["title"]
+                content = form_entry.cleaned_data["content"]; print(f"POST content: {content}")
+
+                util.save_entry(title, bytes(content, "utf8"))
+                file_html_body = util.render_markdown(title)
+            
+                return render(request, "encyclopedia\entries_struct.html", {
+                    "title": title,
+                    "body": file_html_body,
+                })
+
+        form_entry_2 = NewEntry()
+        form_entry_2.fields['title'].initial = title
+        form_entry_2.fields['content'].initial = content
 
         return render(request, R"encyclopedia\edit_page.html", {
-            "title": TITLE,
-            "form": EditEntry(),
+            "title": title,
+            "form": form_entry_2,
         })
 
 
