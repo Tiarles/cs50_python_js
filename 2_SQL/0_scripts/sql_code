@@ -1,0 +1,115 @@
+CREATE TABLE flights (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    origin TEXT NOT NULL,
+    destination TEXT NOT NULL,
+    duration INTEGER NOT NULL
+);
+
+SELECT * FROM flights;
+
+INSERT INTO flights (origin, destination, duration) VALUES ('New York', 'London', 415);
+
+SELECT * FROM flights;  -- 1|New York|London|415
+
+INSERT INTO flights (origin, destination, duration) VALUES ('Shangai', 'Paris', 760);
+INSERT INTO flights (origin, destination, duration) VALUES ('Istanbul', 'Tokyo', 700);
+INSERT INTO flights (origin, destination, duration) VALUES ('New York', 'Paris', 435);
+INSERT INTO flights (origin, destination, duration) VALUES ('Moscow', 'Paris', 245);
+INSERT INTO flights (origin, destination, duration) VALUES ('Lima', 'New York', 455);
+
+.mode columns
+.headers yes
+
+SELECT * FROM flights;  
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 1   New York  London       415
+-- 2   Shangai   Paris        760
+-- 3   Istanbul  Tokyo        700
+-- 4   New York  Paris        435
+-- 5   Moscow    Paris        245
+-- 6   Lima      New York     455
+
+SELECT * FROM flights WHERE origin = 'New York';
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 1   New York  London       415
+-- 4   New York  Paris        435
+
+SELECT * FROM flights WHERE duration > 500;
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 2   Shangai   Paris        760
+-- 3   Istanbul  Tokyo        700
+
+SELECT * FROM flights WHERE duration > 500 AND destination = 'Paris';
+-- id  origin   destination  duration
+-- --  -------  -----------  --------
+-- 2   Shangai  Paris        760
+
+SELECT * FROM flights WHERE duration > 500 OR destination = 'Paris';
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 2   Shangai   Paris        760
+-- 3   Istanbul  Tokyo        700
+-- 4   New York  Paris        435
+-- 5   Moscow    Paris        245
+
+SELECT * FROM flights WHERE origin IN ('New York', 'Lima');
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 1   New York  London       415
+-- 4   New York  Paris        435
+-- 6   Lima      New York     455
+
+-- Take all the flights with origin has `a`
+SELECT * FROM flights WHERE origin LIKE '%a%';  -- Percentage is a wild card
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 2   Shangai   Paris        760
+-- 3   Istanbul  Tokyo        700
+-- 6   Lima      New York     455
+
+SELECT * FROM flights 
+    WHERE origin = 'New York'
+    AND destination = 'London';
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 1   New York  London       415
+
+UPDATE flights
+    SET duration = 430
+    WHERE origin = 'New York'
+    AND destination = 'London';
+
+SELECT * FROM flights 
+    WHERE origin = 'New York'
+    AND destination = 'London';
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 1   New York  London       430
+
+.mode columns
+.headers yes
+
+SELECT * FROM flights WHERE destination = 'Tokyo';
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 3   Istanbul  Tokyo        700
+
+DELETE FROM flights WHERE destination = 'Tokyo';
+
+INSERT INTO flights (id, origin, destination, duration) VALUES (3, 'Istanbul', 'Tokyo', 700);
+
+
+-- Other clauses
+
+SELECT * FROM flights ORDER BY duration;
+-- id  origin    destination  duration
+-- --  --------  -----------  --------
+-- 5   Moscow    Paris        245
+-- 1   New York  London       430
+-- 4   New York  Paris        435
+-- 6   Lima      New York     455
+-- 3   Istanbul  Tokyo        700
+-- 2   Shangai   Paris        760
