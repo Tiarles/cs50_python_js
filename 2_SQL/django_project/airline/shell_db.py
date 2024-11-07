@@ -45,3 +45,26 @@ f.origin.code
 lhr.arrivals.all()
 # Out[15]: <QuerySet [<Flight: 1 New York (JFK) London (LHR)>]>
 
+##########################################
+# cd  C:\Tiarles\cs50_python_js\2_SQL\django_project\airline
+# ipython
+# python.exe .\manage.py shell
+from flights.models import Airport, Flight
+
+Airport.objects.filter(city="New York")
+# Out[13]: <QuerySet [<Airport: New York (JFK)>]>
+
+Airport.objects.get(city="New York")
+# Out[14]: <Airport: New York (JFK)>
+
+jfk = Airport.objects.get(city="New York")
+lhr = Airport.objects.get(city="London")
+cdg = Airport.objects.get(city="Paris")
+nrt = Airport.objects.get(city="Tokyo")
+
+f = Flight(origin=jfk, destination=cdg, duration=435)
+f.save()
+
+# Username (leave blank to use 'david'): tiarles
+# Email address: tiarlesmoralles@hotmail.com
+# Password: 
