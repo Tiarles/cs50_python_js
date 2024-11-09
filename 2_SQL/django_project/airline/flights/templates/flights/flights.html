@@ -6,6 +6,7 @@
         <li>Origin: {{ flight.origin }}</li>
         <li>Destination: {{ flight.destination }}</li>
         <li>Origin: {{ flight.origin }}</li>
-        <li>Duration: {{ flight.duration }}</li>    
+        <li>Duration: {{ flight.duration }} minutes</li>    
     </ul>
+    <a href="{% url 'index' %}">All flights</a>
 {% endblock %}
