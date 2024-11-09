@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
-from .models import Flight
+from .models import Flight, Airport
+
 
 def index(request):
     return render (request, "flights/index.html", {
@@ -8,6 +9,9 @@ def index(request):
     })
 
 
-def flights(request, flight_id):
-    flight = Flight.objects.all(id=flight_id)
-    return render(request, "flights/flights.html", {})
+def flight(request, flight_id):
+    flight = Flight.objects.get(id=flight_id)
+
+    return render(request, "flights/flights.html", {
+        "flight": flight, 
+    })

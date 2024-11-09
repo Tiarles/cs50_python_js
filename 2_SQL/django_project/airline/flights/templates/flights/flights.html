@@ -1,10 +1,11 @@
 {% extends "flights/layout.html" %}
 
 {% block body %}
-    <h1>Flights</h1>
+    <h1>Flights {{ flight.id }}</h1>
     <ul>
-        {% for flight in flights %}
-            <li>Flight <strong>{{ flight.id }}<strong>: From <strong>{{ flight.origin }}</strong> to <strong>{{ flight.destination }}</strong></li>
-        {% endfor %}
+        <li>Origin: {{ flight.origin }}</li>
+        <li>Destination: {{ flight.destination }}</li>
+        <li>Origin: {{ flight.origin }}</li>
+        <li>Duration: {{ flight.duration }}</li>    
     </ul>
 {% endblock %}
