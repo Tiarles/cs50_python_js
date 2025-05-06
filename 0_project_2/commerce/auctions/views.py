@@ -61,3 +61,28 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+# From Specification:
+#
+# - Create Listing: Users should be able to visit a page to create a
+# new listing. They should be able to specify:
+#   - A title for the listing,
+#   - A text-based description, and
+#   - What the starting bid should be. 
+# Users should also optionally be able to:
+#   -  Provide a URL for an image for the listing and/or a category
+#      (e.g. Fashion, Toys, Electronics, Home, etc.).
+
+
+def new_listing(request):
+    # 1) Check if the user is authenticated
+    if not request.user.is_authenticated:
+        # return HttpResponseRedirect(reverse("login"))
+        return render(request, "auctions/login.html", {
+                "message": "You must be logged in to create a listing!"
+            })
+    else:
+        return render(request, "auctions/new_listing.html", {
+            "message": "",
+        })
