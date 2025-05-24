@@ -73,6 +73,14 @@ def register(request):
 # Users should also optionally be able to:
 #   -  Provide a URL for an image for the listing and/or a category
 #      (e.g. Fashion, Toys, Electronics, Home, etc.).
+#
+# Mockup data:
+# - Title: Vintage Nintendo GameBoy
+# - Description: Original GameBoy from 1989 in excellent condition. Includes Tetris game cartridge and original carrying case. Battery cover intact, screen has no dead pixels.
+# - Starting bid value: 49.99
+# - URL Image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Game-Boy-FL.png/800px-Game-Boy-FL.png"
+# 
+
 
 
 def new_listing(request):
@@ -82,7 +90,21 @@ def new_listing(request):
         return render(request, "auctions/login.html", {
                 "message": "You must be logged in to create a listing!"
             })
-    else:
+
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        starting_bid = request.POST["starting_bid"]
+        url_image = request.POST["url_image"]
+
+        print("title:", title)
+        print("description:", description)
+        print("starting_bid:", starting_bid)
+        print("url_image:", url_image)
+
         return render(request, "auctions/new_listing.html", {
-            "message": "",
+            "message": "Invalid URL",
         })
+    return render(request, "auctions/new_listing.html", {
+        "message": "Invalid URLInvalid URL",
+    })
