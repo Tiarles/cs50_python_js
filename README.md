@@ -13,3 +13,6 @@ https://www.w3schools.com/howto/howto_css_image_center.asp
 https://www.google.com/advanced_search
 https://cs50.harvard.edu/web/2020/projects/0/search/
 https://cs50.harvard.edu/web/2020/notes/0
+
+## To create a superuser
+> python manage.py createsuperuser

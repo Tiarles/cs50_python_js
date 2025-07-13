@@ -3,7 +3,8 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
+    def __str__(self):
+        return f"{self.username}, {self.email}"
 
 
 class Listing(models.Model):
@@ -12,10 +13,6 @@ class Listing(models.Model):
     starting_bid = models.FloatField()
     url_image = models.CharField(max_length=64)
 
-
-class Airport(models.Model):
-    code = models.CharField(max_length=3)
-    city = models.CharField(max_length=64)
-
     def __str__(self):
-        return f"{self.city} ({self.code})"
+        return f"{self.title} ($ {self.starting_bid})"
+
