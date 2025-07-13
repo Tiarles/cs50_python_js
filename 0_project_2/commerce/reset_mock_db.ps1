@@ -9,7 +9,7 @@ python manage.py createsuperuser --noinput
 python manage.py makemigrations
 python manage.py migrate
 
-# python manage.py shell -c "exec(open('mock_db_data.py').read())"
+python manage.py shell -c "exec(open('mock_db_data.py').read())"
 
 # python .\manage.py dumpdata -o db_copy.json
 

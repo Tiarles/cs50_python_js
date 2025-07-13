@@ -3,7 +3,7 @@
 from auctions.models import User, Listing
 
 # Adding users
-pope = User(
+pope = User.objects.create_user(
     first_name = "Pope",
     username="Pope Francis",
     last_name = "Francis",
@@ -12,7 +12,7 @@ pope = User(
 )
 pope.save()
 
-david = User(
+david = User.objects.create_user(
     first_name = "David",
     username="David Pop",
     last_name = "Pop",
@@ -36,7 +36,7 @@ random_entries = [
 ]
 
 for entry in random_entries:   
-    user = User(
+    user = User.objects.create_user(
         first_name=entry[0],
         username=entry[0],
         last_name=entry[1],

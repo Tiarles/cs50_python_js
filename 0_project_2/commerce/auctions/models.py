@@ -11,6 +11,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=128)
     description = models.TextField(max_length=1000)
     starting_bid = models.FloatField()
+    category = models.CharField(max_length=64)
     url_image = models.CharField(max_length=64)
 
     def __str__(self):
