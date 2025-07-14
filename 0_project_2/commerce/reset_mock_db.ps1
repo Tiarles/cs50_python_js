@@ -6,7 +6,7 @@ $env:DJANGO_SUPERUSER_PASSWORD="david12345"
 
 python manage.py createsuperuser --noinput
 
-python manage.py makemigrations
+python manage.py makemigrations auctions
 python manage.py migrate
 
 python manage.py shell -c "exec(open('mock_db_data.py').read())"

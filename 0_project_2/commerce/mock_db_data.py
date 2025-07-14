@@ -46,53 +46,52 @@ for entry in random_entries:
     user.save()
 
 
-# Listing = Listing()
+# Listing items
 
+mock_listings = [
+    {
+        "title": "Vintage Nintendo GameBoy",
+        "description": "Original GameBoy from 1989 in excellent condition. Includes Tetris game cartridge and original carrying case. Battery cover intact, screen has no dead pixels.",
+        "starting_bid": 49.99,
+        "category": "electronics",
+        "url_image": "https://images.example.com/gameboy.jpg"
+    },
+    {
+        "title": "Vintage Rolex Watch",
+        "description": "Classic 1970s Rolex Oyster Perpetual, stainless steel, excellent condition.",
+        "starting_bid": 2500,
+        "category": "fashion",
+        "url_image": "https://images.example.com/rolex.jpg"
+    },
+    {
+        "title": "Apple MacBook Pro 2021",
+        "description": "M1 Pro chip, 16GB RAM, 512GB SSD, lightly used, includes charger.",
+        "starting_bid": 1200,
+        "category": "electronics",
+        "url_image": "https://images.example.com/macbook.jpg"
+    },
+    {
+        "title": "Signed Michael Jordan Jersey",
+        "description": "Authentic Chicago Bulls jersey signed by Michael Jordan, with certificate.",
+        "starting_bid": 5000,
+        "category": "collectibles",
+        "url_image": "https://images.example.com/jordan_jersey.jpg"
+    },
+    {
+        "title": "LEGO Star Wars Millennium Falcon",
+        "description": "Ultimate Collector Series, unopened box, rare and collectible.",
+        "starting_bid": 350,
+        "category": "toys",
+        "url_image": "https://images.example.com/lego_falcon.jpg"
+    }
+]
 
-
-# jfk = Listing()
-# User, 
-
-# # Create some new airports
-# jfk = Airport(code="JFK", city="New York")
-# lhr = Airport(code="LHR", city="London")
-# cdg = Airport(code="CDG", city="Paris")
-# nrt = Airport(code="NRT", city="Tokyo")
-
-# # Save the airports to the database
-# jfk.save()
-# lhr.save()
-# cdg.save()
-# nrt.save()
-
-# # Add a flight and save it to the database
-# f = Flight(origin=jfk, destination=lhr, duration=414)
-# f.save()
-
-# # Display some info about the flight
-# In [14]: f
-# Out[14]: <Flight: 1: New York (JFK) to London (LHR)>
-# In [15]: f.origin
-# Out[15]: <Airport: New York (JFK)>
-
-# # Using the related name to query by airport of arrival:
-# In [17]: lhr.arrivals.all()
-# Out[17]: <QuerySet [<Flight: 1: New York (JFK) to London (LHR)>]>
-
-
-
-# # Using the filter command to find all airports based in New York
-# In [3]: Airport.objects.filter(city="New York")
-# Out[3]: <QuerySet [<Airport: New York (JFK)>]>
-
-# # Using the get command to get only one airport in New York
-# In [5]: Airport.objects.get(city="New York")
-# Out[5]: <Airport: New York (JFK)>
-
-# # Assigning some airports to variable names:
-# In [6]: jfk = Airport.objects.get(city="New York")
-# In [7]: cdg = Airport.objects.get(city="Paris")
-
-# # Creating and saving a new flight:
-# In [8]: f = Flight(origin=jfk, destination=cdg, duration=435)
-# In [9]: f.save()
+for item in mock_listings:
+    listing = Listing(
+        title=item["title"],
+        description=item["description"],
+        starting_bid=item["starting_bid"],
+        category=item["category"],
+        url_image=item["url_image"],
+    )
+    listing.save()

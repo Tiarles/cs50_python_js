@@ -3,4 +3,6 @@
 # cd .\0_project_1\wiki\
 # cd .\2_SQL\django_project\airline\
 cd .\0_project_2\commerce\
+python .\manage.py makemigrations auctions
+python .\manage.py migrate
 python .\manage.py runserver
