@@ -3,5 +3,33 @@
 {% block body %}
     <h2>Active Listings</h2>
 
-    TODO
+    <div class="container">
+        <div class="row justify-content-md-center" style-fornat="background-color: ">
+            <div class="col"><strong>Image</strong></div>
+            <div class="col"><strong>Title</strong></div>
+            <div class="col"><strong>Category</strong></div>
+            <div class="col"><strong>Description</strong></div>
+            <div class="col"><strong>Start</strong> Bid</div>
+        </div>
+        {% for listing in listings %}
+        <div class="row justify-content-md-center">
+            <div class="col">
+                <img src="{{ listing.url_image }}", width="200px">
+            </div>
+            <div class="col">{{ listing.title }}</div>
+            <div class="col">{{ listing.category }}</div>
+            <div class="col">{{ listing.description }}</div>
+            <div class="col">{{ listing.starting_bid }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+        {% comment %}
+        {% endcomment %}
+
+        {% comment %}
+        <li>
+            <a href="{% url 'index' listing.id %}"></a>
+        </li>
+        {% endcomment %}
 {% endblock %}

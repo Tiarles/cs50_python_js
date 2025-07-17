@@ -2,3 +2,7 @@ venv/*
 **/__pycache__/*
 0_project_1/scratch.py
 0_project_1/sketch_wiki/*
+
+**/migrations/*
+
+**/db.sqlite3
