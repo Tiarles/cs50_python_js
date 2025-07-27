@@ -8,11 +8,14 @@ from .models import User, Listing
 
 
 def index(request):
-    # listings = Listing.objects.all()
-    # for listing in listings:
-    #     print(f"title: {listing.title}")
+    listings = Listing.objects.values()
+
+    # Captitalizing Listing Category
+    for listing in listings:
+        listing["category"] = listing["category"].capitalize()
+
     return render(request, "auctions/index.html", {
-        "listings": Listing.objects.all(),
+        "listings": listings,
     })
 
 
@@ -104,3 +107,10 @@ def new_listing(request):
         "message": "",
     })
 
+
+# def listing(request, listing_id):
+#     listings = Listing.objects.get(id=2)
+
+#     return render(request, "auctions/listing.html", {
+#         "listings": listings
+#     })

@@ -1,9 +1,41 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
 
 {% block body %}
     <h2>Active Listings</h2>
+    
+    {% for listing in listings %}
 
-    <div class="container">
+    <div class="row" id="index_listing">
+        <div class="column">
+            {% if listing.url_image %}
+                <img 
+                    src="{{ listing.url_image }}",
+                    id="img_index_listing",
+                    width="300px">
+            {% else %}
+                <img
+                    src="{% static 'auctions/no_image_available.jpg' %}",
+                    id="img_index_listing",
+                    width="300px">
+            {% endif %}
+
+        </div>
+        <div class="column">
+            <h3>{{ listing.title }}</h3>
+            {% if listing.category != "" %}
+                <h4 style="color: grey; font-style: italic;">{{ listing.category }}</h4>
+            {% else %}
+                <h6 style="color: grey; font-style: italic;">No Category</h6>
+            {% endif %}
+            <p>{{ listing.description }}</p>
+            <p>Starting bid: <strong>${{ listing.starting_bid }}</strong></p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% comment %}
+    <!-- <div class="container">
         <div class="row justify-content-md-center" style-fornat="background-color: ">
             <div class="col"><strong>Image</strong></div>
             <div class="col"><strong>Title</strong></div>
@@ -22,14 +54,12 @@
             <div class="col">{{ listing.starting_bid }}</div>
         </div>
         {% endfor %}
-    </div>
+    </div> -->
+    {% endcomment %}
 
         {% comment %}
-        {% endcomment %}
-
-        {% comment %}
-        <li>
+        <!-- <li>
             <a href="{% url 'index' listing.id %}"></a>
-        </li>
+        </li> -->
         {% endcomment %}
 {% endblock %}
